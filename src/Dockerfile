@@ -1,8 +1,15 @@
 FROM ubuntu:16.04
 MAINTAINER Islam A. Ali <islam.a.mustafa@gmail.com>
 
+# ------------------------------------------------------------------------------------------
+# Definitions
+ENV OPENCV_VERSION 3.4.1
+ENV OPENCV_DOWNLOAD_URL https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip
+ENV OpenCV_DIR opencv-$OPENCV_VERSION
+ENV EIGEN_VERSION 3.3.2
+ENV EIGEN_DOWNLOAD_URL http://bitbucket.org/eigen/eigen/get/$EIGEN_VERSION.tar.gz
 
-
+# ------------------------------------------------------------------------------------------
 # [1] General Dependencies
 RUN echo "[Dockerfile Info] Installing GENERAL Dependencies ......"
 RUN apt-get update && apt-get install -y \
@@ -14,12 +21,13 @@ RUN apt-get update && apt-get install -y \
 		wget \
 		git \
 		unzip \
+		curl \
 		software-properties-common
 		
 
 # ------------------------------------------------------------------------------------------                                 
 # [2] OpenCV
-ENV OPENCV 3.4.1
+
 RUN echo "[Dockerfile Info] Installing OPENCV Dependencies ......"
 RUN apt-get update && apt-get install -y \
 	build-essential \
@@ -60,7 +68,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN echo "[Dockerfile Info] Installing OPENCV ......"
 RUN cd /opt && \
-	wget https://github.com/opencv/opencv/archive/3.4.1.zip && \
+	wget "$OPENCV_DOWNLOAD_URL" && \
 	unzip 3.4.1.zip && \
 	cd opencv-3.4.1 && \
 	mkdir build
@@ -97,20 +105,9 @@ RUN mkdir -p ~/pangolin && \
 RUN echo "[Dockerfile Info] Installing EIGEN3 Dependencies ......"
 # none 
 RUN echo "[Dockerfile Info] Installing EIGEN3 ......"
-#RUN mkdir -p ~/eigenLib && \
-#	cd ~/eigenLib && \
-#	curl -fsSL http://bitbucket.org/eigen/eigen/get/3.3.2.tar.gz -o eigen.tar.gz \
-#	cd eigen && \
-#	mkdir build && \
-#	cd build && \
-#    	cmake -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=RELEASE .. && \
-#    	make install 
- 
-RUN curl -fsSL "$EIGEN_DOWNLOAD_URL" -o eigen.tar.gz && \
-	mkdir /usr/include/eigen &&\
-  	tar -xf eigen.tar.gz --strip-components=1 -C /usr/include/eigen && \
-  	rm eigen.tar.gz
-    	
+# installed in the pre-requisits of the opencv Library libeigen3-dev
+
+
 # ------------------------------------------------------------------------------------------
 # [5] Orb-slam2
 RUN echo "[Dockerfile Info] Installing ORB-SLAM2 ......"
