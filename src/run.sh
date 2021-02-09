@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Building Script for ORB-SLAM2 docker container
+# Running Script for ORB-SLAM2 docker container
 
 clear
 echo "========================================================================================================="
@@ -15,4 +15,4 @@ echo "> VERSION: 1.0"
 echo "========================================================================================================="
 
                                                                                                          
-docker build -t islamaali/orbslam2-docker:v1.0 .
+docker run -it -p 5900:5900 -p 6099:6099 --rm islamaali/orbslam2-docker:v1.0 
