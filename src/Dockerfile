@@ -8,7 +8,7 @@ MAINTAINER Islam A. Ali <islam.a.mustafa@gmail.com>
 ENV OPENCV_VERSION 3.4.1
 ENV OPENCV_DOWNLOAD_URL https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip
 ENV OpenCV_DIR opencv-$OPENCV_VERSION
-ENV EIGEN_VERSION 3.3.2
+ENV EIGEN_VERSION 3.2.10
 ENV EIGEN_DOWNLOAD_URL http://bitbucket.org/eigen/eigen/get/$EIGEN_VERSION.tar.gz
 
 ENV TZ=Europe/Minsk
@@ -53,7 +53,6 @@ RUN apt-get update && apt-get install -y \
 	libtiff5-dev \
 	libjasper-dev \
 	libdc1394-22-dev \
-	libeigen3-dev \
 	libtheora-dev \
 	libvorbis-dev \
 	libxvidcore-dev \
@@ -109,8 +108,17 @@ RUN mkdir -p ~/pangolin && \
 RUN echo "[Dockerfile Info] Installing EIGEN3 Dependencies ......"
 # none 
 RUN echo "[Dockerfile Info] Installing EIGEN3 ......"
-# installed in the pre-requisits of the opencv Library libeigen3-dev
-
+RUN mkdir -p ~/eigen && \ 
+		cd ~/eigen && \
+		wget "$EIGEN_DOWNLOAD_URL" && \
+		mkdir $EIGEN_VERSION && \
+		tar --strip-components=1 -xvjf $EIGEN_VERSION.tar.gz -C $EIGEN_VERSION && \
+		cd $EIGEN_VERSION && \
+		mkdir build && \
+		cd build && \
+		cmake .. && \
+		make && \
+		make install 
 
 # ------------------------------------------------------------------------------------------
 # [5] Orb-slam2
