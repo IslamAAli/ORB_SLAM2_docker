@@ -43,10 +43,9 @@ RUN mkdir -p ~/eigen && \
 		mkdir build && \
 		cd build && \
 		cmake .. && \
-		make && \
 		make install 
 
-ENV Eigen3_DIR=/usr/local/share/eigen3/cmake
+#ENV Eigen3_DIR=/usr/local/share/eigen3/cmake
 
 # ------------------------------------------------------------------------------------------
 # [3] Pangolin
