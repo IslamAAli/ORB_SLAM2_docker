@@ -37,7 +37,7 @@ RUN mkdir -p ~/eigen && \
 		cd ~/eigen && \
 		wget "$EIGEN_DOWNLOAD_URL" && \
 		mkdir $EIGEN_VERSION && \
-		tar --strip-components=1 -xvjf $EIGEN_VERSION.tar.gz -C $EIGEN_VERSION && \
+		tar --strip-components=1 -xvjf eigen-$EIGEN_VERSION.tar.gz -C $EIGEN_VERSION && \
 		cd $EIGEN_VERSION && \
 		mkdir build && \
 		cd build && \
