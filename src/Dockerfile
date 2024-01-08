@@ -45,9 +45,32 @@ RUN mkdir -p ~/eigen && \
 		cmake .. && \
 		make && \
 		make install 
+
+ENV Eigen3_DIR=/usr/local/share/eigen3/cmake
+
+# ------------------------------------------------------------------------------------------
+# [3] Pangolin
+RUN echo "[Dockerfile Info] Installing PNGOLIN Dependencies ......"
+RUN apt-get update && apt-get install -y \
+		libgl1-mesa-dev \
+		libglew-dev \
+		libpython2.7-dev \
+		ffmpeg libavcodec-dev libavutil-dev libavformat-dev libswscale-dev libavdevice-dev \
+		libdc1394-22-dev libraw1394-dev \		
+		libjpeg-dev libpng12-dev libtiff5-dev libopenexr-dev
+
+RUN echo "[Dockerfile Info] Installing PNGOLIN ......"
+RUN mkdir -p ~/pangolin && \
+		cd ~/pangolin && \
+		git clone https://github.com/stevenlovegrove/Pangolin.git && \
+		cd Pangolin && \
+		mkdir build && \
+		cd build && \
+		cmake .. && \
+		cmake --build .
 		
 # ------------------------------------------------------------------------------------------                                 
-# [3] OpenCV
+# [4] OpenCV
 RUN echo "[Dockerfile Info] Installing OPENCV Dependencies ......"
 RUN apt-get update && apt-get install -y \
 	build-essential \
@@ -95,27 +118,7 @@ RUN cd /opt/opencv-3.4.1/build && \
 	cmake -D CMAKE_BUILD_TYPE=RELEASE -D WITH_CUDA=OFF -D WITH_OPENGL=OFF ENABLE_CXX11=ON .. && \
 	make -j8 && \
 	make install
-		
-# ------------------------------------------------------------------------------------------
-# [4] Pangolin
-RUN echo "[Dockerfile Info] Installing PNGOLIN Dependencies ......"
-RUN apt-get update && apt-get install -y \
-		libgl1-mesa-dev \
-		libglew-dev \
-		libpython2.7-dev \
-		ffmpeg libavcodec-dev libavutil-dev libavformat-dev libswscale-dev libavdevice-dev \
-		libdc1394-22-dev libraw1394-dev \		
-		libjpeg-dev libpng12-dev libtiff5-dev libopenexr-dev
-
-RUN echo "[Dockerfile Info] Installing PNGOLIN ......"
-RUN mkdir -p ~/pangolin && \
-		cd ~/pangolin && \
-		git clone https://github.com/stevenlovegrove/Pangolin.git && \
-		cd Pangolin && \
-		mkdir build && \
-		cd build && \
-		cmake .. && \
-		cmake --build .	
+			
 
 # ------------------------------------------------------------------------------------------
 # [5] Orb-slam2
