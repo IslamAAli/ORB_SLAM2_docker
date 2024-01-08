@@ -9,7 +9,7 @@ ENV OPENCV_VERSION 3.4.1
 ENV OPENCV_DOWNLOAD_URL https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip
 ENV OpenCV_DIR opencv-$OPENCV_VERSION
 ENV EIGEN_VERSION 3.2.10
-ENV EIGEN_DOWNLOAD_URL http://bitbucket.org/eigen/eigen/get/$EIGEN_VERSION.tar.gz
+ENV EIGEN_DOWNLOAD_URL https://gitlab.com/libeigen/eigen/-/archive/3.2.10/eigen-$EIGEN_VERSION.tar.gz
 
 ENV TZ=Europe/Minsk
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -28,10 +28,25 @@ RUN apt-get update && apt-get install -y \
 		curl \
 		software-properties-common
 		
-
+# ------------------------------------------------------------------------------------------
+# [2] Eigen3
+RUN echo "[Dockerfile Info] Installing EIGEN3 Dependencies ......"
+# none 
+RUN echo "[Dockerfile Info] Installing EIGEN3 ......"
+RUN mkdir -p ~/eigen && \ 
+		cd ~/eigen && \
+		wget "$EIGEN_DOWNLOAD_URL" && \
+		mkdir $EIGEN_VERSION && \
+		tar --strip-components=1 -xvjf $EIGEN_VERSION.tar.gz -C $EIGEN_VERSION && \
+		cd $EIGEN_VERSION && \
+		mkdir build && \
+		cd build && \
+		cmake .. && \
+		make && \
+		make install 
+		
 # ------------------------------------------------------------------------------------------                                 
-# [2] OpenCV
-
+# [3] OpenCV
 RUN echo "[Dockerfile Info] Installing OPENCV Dependencies ......"
 RUN apt-get update && apt-get install -y \
 	build-essential \
@@ -79,24 +94,6 @@ RUN cd /opt/opencv-3.4.1/build && \
 	cmake -D CMAKE_BUILD_TYPE=RELEASE -D WITH_CUDA=OFF -D WITH_OPENGL=OFF ENABLE_CXX11=ON .. && \
 	make -j8 && \
 	make install
-
-
-# ------------------------------------------------------------------------------------------
-# [3] Eigen3
-RUN echo "[Dockerfile Info] Installing EIGEN3 Dependencies ......"
-# none 
-RUN echo "[Dockerfile Info] Installing EIGEN3 ......"
-RUN mkdir -p ~/eigen && \ 
-		cd ~/eigen && \
-		wget "$EIGEN_DOWNLOAD_URL" && \
-		mkdir $EIGEN_VERSION && \
-		tar --strip-components=1 -xvjf $EIGEN_VERSION.tar.gz -C $EIGEN_VERSION && \
-		cd $EIGEN_VERSION && \
-		mkdir build && \
-		cd build && \
-		cmake .. && \
-		make && \
-		make install 
 		
 # ------------------------------------------------------------------------------------------
 # [4] Pangolin
