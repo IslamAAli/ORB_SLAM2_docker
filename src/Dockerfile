@@ -76,13 +76,30 @@ RUN cd /opt && \
 	cd opencv-3.4.1 && \
 	mkdir build
 RUN cd /opt/opencv-3.4.1/build && \ 
-	cmake -D CMAKE_BUILD_TYPE=RELEASE -D WITH_CUDA=OFF -D WITH_OPENGL=OFF .. && \
+	cmake -D CMAKE_BUILD_TYPE=RELEASE -D WITH_CUDA=OFF -D WITH_OPENGL=OFF ENABLE_CXX11=ON .. && \
 	make -j8 && \
 	make install
 
-	
+
 # ------------------------------------------------------------------------------------------
-# [3] Pangolin
+# [3] Eigen3
+RUN echo "[Dockerfile Info] Installing EIGEN3 Dependencies ......"
+# none 
+RUN echo "[Dockerfile Info] Installing EIGEN3 ......"
+RUN mkdir -p ~/eigen && \ 
+		cd ~/eigen && \
+		wget "$EIGEN_DOWNLOAD_URL" && \
+		mkdir $EIGEN_VERSION && \
+		tar --strip-components=1 -xvjf $EIGEN_VERSION.tar.gz -C $EIGEN_VERSION && \
+		cd $EIGEN_VERSION && \
+		mkdir build && \
+		cd build && \
+		cmake .. && \
+		make && \
+		make install 
+		
+# ------------------------------------------------------------------------------------------
+# [4] Pangolin
 RUN echo "[Dockerfile Info] Installing PNGOLIN Dependencies ......"
 RUN apt-get update && apt-get install -y \
 		libgl1-mesa-dev \
@@ -101,24 +118,6 @@ RUN mkdir -p ~/pangolin && \
 		cd build && \
 		cmake .. && \
 		cmake --build .	
-
-
-# ------------------------------------------------------------------------------------------
-# [4] Eigen3
-RUN echo "[Dockerfile Info] Installing EIGEN3 Dependencies ......"
-# none 
-RUN echo "[Dockerfile Info] Installing EIGEN3 ......"
-RUN mkdir -p ~/eigen && \ 
-		cd ~/eigen && \
-		wget "$EIGEN_DOWNLOAD_URL" && \
-		mkdir $EIGEN_VERSION && \
-		tar --strip-components=1 -xvjf $EIGEN_VERSION.tar.gz -C $EIGEN_VERSION && \
-		cd $EIGEN_VERSION && \
-		mkdir build && \
-		cd build && \
-		cmake .. && \
-		make && \
-		make install 
 
 # ------------------------------------------------------------------------------------------
 # [5] Orb-slam2
