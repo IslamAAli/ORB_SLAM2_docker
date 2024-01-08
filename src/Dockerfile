@@ -21,8 +21,8 @@ RUN apt-get update && apt-get install -y \
 		cmake \
 		pkg-config \
 		htop \
-		gedit \
 		wget \
+		gedit \
 		git \
 		unzip \
 		curl \
