@@ -39,6 +39,7 @@ RUN mkdir -p ~/eigen && \
 		mkdir $EIGEN_VERSION && \
 		unzip eigen-$EIGEN_VERSION.zip -d $EIGEN_VERSION && \
 		cd $EIGEN_VERSION && \
+		cd eigen-$EIGEN_VERSION && \
 		mkdir build && \
 		cd build && \
 		cmake .. && \
