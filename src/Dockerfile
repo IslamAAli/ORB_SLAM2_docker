@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 MAINTAINER Islam A. Ali <islam.a.mustafa@gmail.com>
 
 
@@ -11,6 +11,8 @@ ENV OpenCV_DIR opencv-$OPENCV_VERSION
 ENV EIGEN_VERSION 3.3.2
 ENV EIGEN_DOWNLOAD_URL http://bitbucket.org/eigen/eigen/get/$EIGEN_VERSION.tar.gz
 
+ENV TZ=Europe/Minsk
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # ------------------------------------------------------------------------------------------
 # [1] General Dependencies
 RUN echo "[Dockerfile Info] Installing GENERAL Dependencies ......"
@@ -37,7 +39,7 @@ RUN apt-get update && apt-get install -y \
 	libavcodec-dev\
 	libavformat-dev\ 
 	libswscale-dev \
-	python3.5-dev \
+	python3.7-dev \
 	python3-numpy \
 	libtbb2 \
 	libtbb-dev
