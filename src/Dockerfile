@@ -57,7 +57,7 @@ RUN apt-get update && apt-get install -y \
 		libpython2.7-dev \
 		ffmpeg libavcodec-dev libavutil-dev libavformat-dev libswscale-dev libavdevice-dev \
 		libdc1394-22-dev libraw1394-dev \		
-		libjpeg-dev libpng12-dev libtiff5-dev libopenexr-dev
+		libjpeg-dev libpng-dev libtiff5-dev libopenexr-dev
 
 RUN echo "[Dockerfile Info] Installing PNGOLIN ......"
 RUN mkdir -p ~/pangolin && \
