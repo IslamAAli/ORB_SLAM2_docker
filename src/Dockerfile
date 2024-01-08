@@ -9,7 +9,7 @@ ENV OPENCV_VERSION 3.4.1
 ENV OPENCV_DOWNLOAD_URL https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip
 ENV OpenCV_DIR opencv-$OPENCV_VERSION
 ENV EIGEN_VERSION 3.2.10
-ENV EIGEN_DOWNLOAD_URL https://gitlab.com/libeigen/eigen/-/archive/3.2.10/eigen-$EIGEN_VERSION.tar.gz
+ENV EIGEN_DOWNLOAD_URL https://gitlab.com/libeigen/eigen/-/archive/3.2.10/eigen-$EIGEN_VERSION.zip
 
 ENV TZ=Europe/Minsk
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -37,7 +37,7 @@ RUN mkdir -p ~/eigen && \
 		cd ~/eigen && \
 		wget "$EIGEN_DOWNLOAD_URL" && \
 		mkdir $EIGEN_VERSION && \
-		tar --strip-components=1 -xvjf eigen-$EIGEN_VERSION.tar.gz -C $EIGEN_VERSION && \
+		unzip eigen-$EIGEN_VERSION.zip -d $EIGEN_VERSION && \
 		cd $EIGEN_VERSION && \
 		mkdir build && \
 		cd build && \
