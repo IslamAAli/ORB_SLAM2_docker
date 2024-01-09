@@ -25,6 +25,7 @@ RUN apt-get update && apt-get install -y \
 		gedit \
 		git \
 		unzip \
+		gfortran \
 		curl \
 		software-properties-common
 		
