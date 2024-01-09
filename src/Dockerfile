@@ -65,7 +65,7 @@ RUN apt-get update && apt-get install -y \
 RUN echo "[Dockerfile Info] Installing PNGOLIN ......"
 RUN mkdir -p ~/pangolin && \
 		cd ~/pangolin && \
-		wget "PANGOLIN_DOWNLOAD_PATH" && \
+		wget "$PANGOLIN_DOWNLOAD_PATH" && \
 		mkdir Pangolin && \
 		unzip v$PANGOLIN_VERSION.zip -d Pangolin && \
 		cd Pangolin && \
