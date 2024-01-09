@@ -16,7 +16,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # ------------------------------------------------------------------------------------------
 # [1] General Dependencies
 RUN echo "[Dockerfile Info] Installing GENERAL Dependencies ......"
-RUN RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
 	 	build-essential \
 		cmake \
 		pkg-config \
