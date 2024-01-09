@@ -66,7 +66,7 @@ RUN echo "[Dockerfile Info] Installing PNGOLIN ......"
 RUN mkdir -p ~/pangolin && \
 		cd ~/pangolin && \
 		wget "PANGOLIN_DOWNLOAD_PATH" && \
-		mkdir Pangolin && 
+		mkdir Pangolin && \
 		unzip v$PANGOLIN_VERSION.zip -d Pangolin && \
 		cd Pangolin && \
 		mkdir build && \
