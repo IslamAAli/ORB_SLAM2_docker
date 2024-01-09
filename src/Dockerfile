@@ -67,6 +67,7 @@ RUN mkdir -p ~/pangolin && \
 		cd ~/pangolin && \
 		wget "$PANGOLIN_DOWNLOAD_PATH" && \
 		mkdir $PANGOLIN_VERSION && \
+		ls && \
 		unzip Pangolin-$PANGOLIN_VERSION.zip -d $PANGOLIN_VERSION && \
 		cd $PANGOLIN_VERSION && \
 		mkdir build && \
