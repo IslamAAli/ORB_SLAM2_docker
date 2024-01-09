@@ -10,6 +10,8 @@ ENV OPENCV_DOWNLOAD_URL https://github.com/opencv/opencv/archive/$OPENCV_VERSION
 ENV OpenCV_DIR opencv-$OPENCV_VERSION
 ENV EIGEN_VERSION 3.2.10
 ENV EIGEN_DOWNLOAD_URL https://gitlab.com/libeigen/eigen/-/archive/3.2.10/eigen-$EIGEN_VERSION.zip
+ENV PANGOLIN_VERSION 0.8
+ENV PANGOLIN_DOWNLOAD_PATH https://github.com/stevenlovegrove/Pangolin/archive/refs/tags/v$PANGOLIN_VERSION.zip
 
 ENV TZ=Europe/Minsk
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -63,7 +65,9 @@ RUN apt-get update && apt-get install -y \
 RUN echo "[Dockerfile Info] Installing PNGOLIN ......"
 RUN mkdir -p ~/pangolin && \
 		cd ~/pangolin && \
-		git clone https://github.com/stevenlovegrove/Pangolin.git && \
+		wget "PANGOLIN_DOWNLOAD_PATH" && \
+		mkdir Pangolin && 
+		unzip v$PANGOLIN_VERSION.zip -d Pangolin && \
 		cd Pangolin && \
 		mkdir build && \
 		cd build && \
