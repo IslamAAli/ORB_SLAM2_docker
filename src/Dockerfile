@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 MAINTAINER Islam A. Ali <islam.a.mustafa@gmail.com>
 
 
@@ -70,6 +70,7 @@ RUN mkdir -p ~/pangolin && \
 		ls && \
 		unzip v$PANGOLIN_VERSION.zip -d $PANGOLIN_VERSION && \
 		cd $PANGOLIN_VERSION && \
+		cd Pangolin-$PANGOLIN_VERSION && \
 		mkdir build && \
 		cd build && \
 		cmake .. && \
