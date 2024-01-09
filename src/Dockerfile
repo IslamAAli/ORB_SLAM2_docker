@@ -33,22 +33,24 @@ RUN apt-get update && apt-get install -y \
 		software-properties-common
 		
 # ------------------------------------------------------------------------------------------
-# # [2] Eigen3
-# RUN echo "[Dockerfile Info] Installing EIGEN3 Dependencies ......"
-# # none 
-# RUN echo "[Dockerfile Info] Installing EIGEN3 ......"
-# RUN mkdir -p ~/eigen && \ 
-# 		cd ~/eigen && \
-# 		wget "$EIGEN_DOWNLOAD_URL" && \
-# 		mkdir $EIGEN_VERSION && \
-# 		unzip eigen-$EIGEN_VERSION.zip -d $EIGEN_VERSION && \
-# 		cd $EIGEN_VERSION && \
-# 		cd eigen-$EIGEN_VERSION && \
-# 		mkdir build && \
-# 		cd build && \
-# 		cmake .. && \
-# 		make install 
-# 		RUN ls /usr/local/share
+# [2] Eigen3
+RUN echo "[Dockerfile Info] Installing EIGEN3 Dependencies ......"
+# none 
+RUN echo "[Dockerfile Info] Installing EIGEN3 ......"
+RUN mkdir -p ~/eigen && \ 
+		cd ~/eigen && \
+		wget "$EIGEN_DOWNLOAD_URL" && \
+		mkdir $EIGEN_VERSION && \
+		unzip eigen-$EIGEN_VERSION.zip -d $EIGEN_VERSION && \
+		cd $EIGEN_VERSION && \
+		cd eigen-$EIGEN_VERSION && \
+		mkdir build && \
+		cd build && \
+		cmake .. && \
+		make install 
+
+RUN export CMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH:/opt/eigen/3.3"
+
 
 
 # ------------------------------------------------------------------------------------------
