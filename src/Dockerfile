@@ -54,29 +54,29 @@ RUN export CMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH:/opt/eigen/3.3"
 
 
 # ------------------------------------------------------------------------------------------
-# [3] Pangolin
-RUN echo "[Dockerfile Info] Installing PNGOLIN Dependencies ......"
-RUN apt-get update && apt-get install -y \
-		libgl1-mesa-dev \
-		libglew-dev \
-		libpython2.7-dev \
-		ffmpeg libavcodec-dev libavutil-dev libavformat-dev libswscale-dev libavdevice-dev \
-		libdc1394-22-dev libraw1394-dev \		
-		libjpeg-dev libpng-dev libtiff5-dev libopenexr-dev
+# # [3] Pangolin
+# RUN echo "[Dockerfile Info] Installing PNGOLIN Dependencies ......"
+# RUN apt-get update && apt-get install -y \
+# 		libgl1-mesa-dev \
+# 		libglew-dev \
+# 		libpython2.7-dev \
+# 		ffmpeg libavcodec-dev libavutil-dev libavformat-dev libswscale-dev libavdevice-dev \
+# 		libdc1394-22-dev libraw1394-dev \		
+# 		libjpeg-dev libpng-dev libtiff5-dev libopenexr-dev
 
-RUN echo "[Dockerfile Info] Installing PNGOLIN ......"
-RUN mkdir -p ~/pangolin && \
-		cd ~/pangolin && \
-		wget "$PANGOLIN_DOWNLOAD_PATH" && \
-		mkdir $PANGOLIN_VERSION && \
-		ls && \
-		unzip v$PANGOLIN_VERSION.zip -d $PANGOLIN_VERSION && \
-		cd $PANGOLIN_VERSION && \
-		cd Pangolin-$PANGOLIN_VERSION && \
-		mkdir build && \
-		cd build && \
-		cmake .. && \
-		cmake --build .
+# RUN echo "[Dockerfile Info] Installing PNGOLIN ......"
+# RUN mkdir -p ~/pangolin && \
+# 		cd ~/pangolin && \
+# 		wget "$PANGOLIN_DOWNLOAD_PATH" && \
+# 		mkdir $PANGOLIN_VERSION && \
+# 		ls && \
+# 		unzip v$PANGOLIN_VERSION.zip -d $PANGOLIN_VERSION && \
+# 		cd $PANGOLIN_VERSION && \
+# 		cd Pangolin-$PANGOLIN_VERSION && \
+# 		mkdir build && \
+# 		cd build && \
+# 		cmake .. && \
+# 		cmake --build .
 		
 # # ------------------------------------------------------------------------------------------                                 
 # # [4] OpenCV
