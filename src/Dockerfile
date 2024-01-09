@@ -26,7 +26,6 @@ RUN apt-get update && apt-get install -y \
 		wget \
 		gedit \
 		git \
-		libeigen3-dev \
 		unzip \
 		gfortran \
 		curl \
@@ -49,7 +48,7 @@ RUN mkdir -p ~/eigen && \
 		cmake .. && \
 		make install 
 
-RUN export CMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH:/opt/eigen/3.3"
+RUN export CMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH:./usr/lib/cmake/"
 
 
 
@@ -75,7 +74,7 @@ RUN mkdir -p ~/pangolin && \
 		cd Pangolin-$PANGOLIN_VERSION && \
 		mkdir build && \
 		cd build && \
-		cmake .. && \
+		cmake .. -DEigen3_DIR=/usr/lib/cmake/eigen3 && \
 		cmake --build .
 		
 # # ------------------------------------------------------------------------------------------                                 
