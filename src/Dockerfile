@@ -42,10 +42,10 @@ RUN mkdir -p ~/eigen && \
 		cd eigen-$EIGEN_VERSION && \
 		mkdir build && \
 		cd build && \
-		cmake .. && \
+		cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local && \
 		make install 
+		RUN ls /usr/local/share
 
-ENV Eigen3_DIR=/usr/local/share/eigen3/cmake
 
 # # ------------------------------------------------------------------------------------------
 # # [3] Pangolin
