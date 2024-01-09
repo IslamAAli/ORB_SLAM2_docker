@@ -24,50 +24,51 @@ RUN apt-get update && apt-get install -y \
 		wget \
 		gedit \
 		git \
+		libeigen3-dev \
 		unzip \
 		gfortran \
 		curl \
 		software-properties-common
 		
 # ------------------------------------------------------------------------------------------
-# [2] Eigen3
-RUN echo "[Dockerfile Info] Installing EIGEN3 Dependencies ......"
-# none 
-RUN echo "[Dockerfile Info] Installing EIGEN3 ......"
-RUN mkdir -p ~/eigen && \ 
-		cd ~/eigen && \
-		wget "$EIGEN_DOWNLOAD_URL" && \
-		mkdir $EIGEN_VERSION && \
-		unzip eigen-$EIGEN_VERSION.zip -d $EIGEN_VERSION && \
-		cd $EIGEN_VERSION && \
-		cd eigen-$EIGEN_VERSION && \
-		mkdir build && \
-		cd build && \
-		cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local && \
-		make install 
-		RUN ls /usr/local/share
-
-
-# # ------------------------------------------------------------------------------------------
-# # [3] Pangolin
-# RUN echo "[Dockerfile Info] Installing PNGOLIN Dependencies ......"
-# RUN apt-get update && apt-get install -y \
-# 		libgl1-mesa-dev \
-# 		libglew-dev \
-# 		libpython2.7-dev \
-# 		ffmpeg libavcodec-dev libavutil-dev libavformat-dev libswscale-dev libavdevice-dev \
-# 		libdc1394-22-dev libraw1394-dev \		
-# 		libjpeg-dev libpng-dev libtiff5-dev libopenexr-dev
-
-# RUN echo "[Dockerfile Info] Installing PNGOLIN ......"
-# RUN mkdir -p ~/pangolin && \
-# 		cd ~/pangolin && \
-# 		git clone https://github.com/stevenlovegrove/Pangolin.git && \
-# 		cd Pangolin && \
+# # [2] Eigen3
+# RUN echo "[Dockerfile Info] Installing EIGEN3 Dependencies ......"
+# # none 
+# RUN echo "[Dockerfile Info] Installing EIGEN3 ......"
+# RUN mkdir -p ~/eigen && \ 
+# 		cd ~/eigen && \
+# 		wget "$EIGEN_DOWNLOAD_URL" && \
+# 		mkdir $EIGEN_VERSION && \
+# 		unzip eigen-$EIGEN_VERSION.zip -d $EIGEN_VERSION && \
+# 		cd $EIGEN_VERSION && \
+# 		cd eigen-$EIGEN_VERSION && \
 # 		mkdir build && \
 # 		cd build && \
 # 		cmake .. && \
-# 		cmake --build .
+# 		make install 
+# 		RUN ls /usr/local/share
+
+
+# ------------------------------------------------------------------------------------------
+# [3] Pangolin
+RUN echo "[Dockerfile Info] Installing PNGOLIN Dependencies ......"
+RUN apt-get update && apt-get install -y \
+		libgl1-mesa-dev \
+		libglew-dev \
+		libpython2.7-dev \
+		ffmpeg libavcodec-dev libavutil-dev libavformat-dev libswscale-dev libavdevice-dev \
+		libdc1394-22-dev libraw1394-dev \		
+		libjpeg-dev libpng-dev libtiff5-dev libopenexr-dev
+
+RUN echo "[Dockerfile Info] Installing PNGOLIN ......"
+RUN mkdir -p ~/pangolin && \
+		cd ~/pangolin && \
+		git clone https://github.com/stevenlovegrove/Pangolin.git && \
+		cd Pangolin && \
+		mkdir build && \
+		cd build && \
+		cmake .. && \
+		cmake --build .
 		
 # # ------------------------------------------------------------------------------------------                                 
 # # [4] OpenCV
